@@ -6,12 +6,17 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-      - uses: actions/checkout@master          
-      - name: Building Docker Image
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          # 下方的name格式为：Docker Hub ID/自定义镜像名称steps:          
+    steps:
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
         uses: ksudhuf/vseewewr 
+        with: 
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASS }}
       -
